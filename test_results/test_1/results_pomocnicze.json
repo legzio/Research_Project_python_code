@@ -1,0 +1,4 @@
+{"timestamp": 1010076493, "domain": "ellalouis.online", "regdomain": "ellalouis.online", "SLD_TLD": "ellalouis.online", "SLD": "ellalouis", "TLD": "online", "issuer": "Sectigo Limited", "weight": 25}
+{"timestamp": 879145011, "domain": "auth.sb.ontariowebservices.ca", "regdomain": "ontariowebservices.ca", "SLD_TLD": "ontariowebservices.ca", "SLD": "ontariowebservices", "TLD": "ca", "issuer": "Let's Encrypt", "weight": 25}
+{"timestamp": 879145012, "domain": "boschcarservicewestland.nl", "regdomain": "boschcarservicewestland.nl", "SLD_TLD": "boschcarservicewestland.nl", "SLD": "boschcarservicewestland", "TLD": "nl", "issuer": "Let's Encrypt", "weight": 25}
+{"timestamp": 879145014, "domain": "auth.sb.ontariowebservices.ca", "regdomain": "ontariowebservices.ca", "SLD_TLD": "ontariowebservices.ca", "SLD": "ontariowebservices", "TLD": "ca", "issuer": "Let's Encrypt", "weight": 25}

@@ -1,0 +1,8 @@
+.netflix.com
+.apple.com
+.icloud.com
+.paypal.com
+.itunes.com
+.haufe.io
+.now.sh
+.cas.ms
