@@ -73,37 +73,37 @@ for filename in os.listdir(data_folder):
                     for folder, weight in dict_folders_domain.items():
                         if any(keyword in record["domain"] for keyword in keywords_domain[folder]):
                             results[record["timestamp"]]["weight"] += weight
-                            print("Weight keywords:", results[record["timestamp"]]["weight"])
+                            # print("Weight keywords:", results[record["timestamp"]]["weight"])
                     for folder, weight in dict_folders_tld.items():
                         if any(keyword == record["TLD"] for keyword in keywords_tld[folder]):
                             results[record["timestamp"]]["weight"] += weight
-                            print("Weight TLD:", results[record["timestamp"]]["weight"])
+                            # print("Weight TLD:", results[record["timestamp"]]["weight"])
                     for folder, weight in dict_folders_sld_tld.items():
                         if any(keyword == record["SLD_TLD"] for keyword in keywords_sld_tld[folder]):
                             results[record["timestamp"]]["weight"] += weight
-                            print("Weight SLD_TLD:", results[record["timestamp"]]["weight"])
+                            # print("Weight SLD_TLD:", results[record["timestamp"]]["weight"])
                     try:
                         encoded_domain = idna.encode(record["domain"])
                         if record["domain"] != encoded_domain.decode():
                             results[record["timestamp"]]["weight"] += 20
-                            print("Weight IDN:", results[record["timestamp"]]["weight"])
+                            # print("Weight IDN:", results[record["timestamp"]]["weight"])
                     except idna.IDNAError:  
                         print (f'{record["domain"]} is not a valid IDN domain') 
 
                     dot_count = record["domain"].count('.')
                     if dot_count > 2:
                         results[record["timestamp"]]["weight"] += dot_count * 3
-                        print("Weight dots:", results[record["timestamp"]]["weight"])
+                        # print("Weight dots:", results[record["timestamp"]]["weight"])
 
                     dash_count = record["domain"].count('-')
                     if dash_count > 1:
                         results[record["timestamp"]]["weight"] += dash_count * 3
-                        print("Weight dashes:", results[record["timestamp"]]["weight"])
+                        # print("Weight dashes:", results[record["timestamp"]]["weight"])
 
                     domain_length = len(record["domain"])
                     if domain_length > 40:
                         results[record["timestamp"]]["weight"] += 10
-                        print("Weight lenght:", results[record["timestamp"]]["weight"])
+                        # print("Weight lenght:", results[record["timestamp"]]["weight"])
     
         
 
