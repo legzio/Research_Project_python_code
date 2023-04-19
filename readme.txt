@@ -6,7 +6,7 @@ Author: Krzysztof Legenza
 
 
 Folders:
-data - test database used in Project
+data - test database used in Project (data zipped - before useing unzip it)
 dict - dictionaries used in aplication:
     d-----        dozwolone
         -a----        allowed.txt
