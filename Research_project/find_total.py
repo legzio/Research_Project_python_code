@@ -20,7 +20,9 @@ dict_folders_issuers = "dict\\wystawcy"
 
 
 # Path to the output file
-output_file = "result.json"
+output_file1 = "result_low.json"
+output_file2 = "result_medium.json"
+output_file3 = "result_high.json"
 
 # Load keywords from files in dict folders
 keywords_domain = {}
@@ -62,12 +64,15 @@ for filename in os.listdir(dict_folders_issuers):
 
 # Search for records with domains containing any keyword
 results = {}
+temp = 0
+rec_tot = 0
 for filename in os.listdir(data_folder):
     with open(os.path.join(data_folder, filename), "r") as f:
         for line in f:
             record = json.loads(line)
-            if not any(keyword in record["regdomain"] for keyword in keywords_allowwed):
-                if any(keyword in record["issuer"] for keyword in keywords_issuers):
+            if not any(keyword in record["regdomain"] or keyword in record["domain"] for keyword in keywords_allowwed):
+                if record["issuer"] and any(keyword in record["issuer"] for keyword in keywords_issuers):
+                    rec_tot += 1
                     if record["timestamp"] not in results:
                         results[record["timestamp"]] = {"record": record, "weight": 0}
                     for folder, weight in dict_folders_domain.items():
@@ -84,21 +89,24 @@ for filename in os.listdir(data_folder):
                             # print("Weight SLD_TLD:", results[record["timestamp"]]["weight"])
                     try:
                         encoded_domain = idna.encode(record["domain"])
-                        if record["domain"] != encoded_domain.decode():
+                        if record["domain"] != encoded_domain.decode() or "xn--" in record["domain"]:
                             results[record["timestamp"]]["weight"] += 20
                             # print("Weight IDN:", results[record["timestamp"]]["weight"])
                     except idna.IDNAError:  
-                        print (f'{record["domain"]} is not a valid IDN domain') 
+                        #print (f'{record["domain"]} is not a valid IDN domain') 
+                        temp += 1
 
                     dot_count = record["domain"].count('.')
                     if dot_count > 2:
-                        results[record["timestamp"]]["weight"] += dot_count * 3
+                        if results[record["timestamp"]]["weight"] > 0:
+                            results[record["timestamp"]]["weight"] += dot_count * 3
                         # print("Weight dots:", results[record["timestamp"]]["weight"])
 
                     dash_count = record["domain"].count('-')
                     if dash_count > 1:
-                        results[record["timestamp"]]["weight"] += dash_count * 3
-                        # print("Weight dashes:", results[record["timestamp"]]["weight"])
+                        if not "xn--" in record["domain"]:
+                            results[record["timestamp"]]["weight"] += dash_count * 3
+                            # print("Weight dashes:", results[record["timestamp"]]["weight"])
 
                     domain_length = len(record["domain"])
                     if domain_length > 40:
@@ -106,14 +114,35 @@ for filename in os.listdir(data_folder):
                         # print("Weight lenght:", results[record["timestamp"]]["weight"])
     
         
-
+print("Number of records - analyzed:", rec_tot)
 # Write results to output file
+
 num_records = 0
-with open(output_file, "w") as f:
+with open(output_file1, "w") as f:
+    for record_id, result in results.items():
+        if result["weight"] >= 50 and result["weight"] < 70:
+            f.write(json.dumps(result["record"]) + "\n")
+            num_records += 1
+            #print("Weight:", result["weight"])
+# Print the number of records
+print("Number of records - low probability:", num_records)
+
+num_records = 0
+with open(output_file2, "w") as f:
+    for record_id, result in results.items():
+        if result["weight"] >= 70 and result["weight"] < 80:
+            f.write(json.dumps(result["record"]) + "\n")
+            num_records += 1
+            #print("Weight:", result["weight"])
+# Print the number of records
+print("Number of records - medium probability:", num_records)
+
+num_records = 0
+with open(output_file3, "w") as f:
     for record_id, result in results.items():
         if result["weight"] >= 80:
             f.write(json.dumps(result["record"]) + "\n")
             num_records += 1
-            print("Weight:", result["weight"])
+            #print("Weight:", result["weight"])
 # Print the number of records
-print("Number of records:", num_records)
+print("Number of records - high probability:", num_records)

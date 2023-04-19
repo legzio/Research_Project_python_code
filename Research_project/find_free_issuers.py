@@ -24,7 +24,7 @@ for filename in os.listdir(data_folder):
             total_records += 1
             record = json.loads(line)
             for keyword in keywords:
-                if keyword in record["issuer"]:
+                if record["issuer"] and keyword in record["issuer"]:
                     counts[keyword] += 1
                     
 # Add total records processed to the counts dictionary

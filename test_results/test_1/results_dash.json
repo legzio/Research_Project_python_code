@@ -1,3 +1,0 @@
-{"timestamp": 1010054705, "domain": "device-local-ec051224-9ac1-4edd-ab74-23f3a652e5dd.remotewd.com", "regdomain": "remotewd.com", "SLD_TLD": "remotewd.com", "SLD": "remotewd", "TLD": "com", "issuer": "Let's Encrypt", "weight": 18}
-{"timestamp": 1010054708, "domain": "metrics-6rn35hhywsvpy.fr-4.platformsh.site", "regdomain": "platformsh.site", "SLD_TLD": "platformsh.site", "SLD": "platformsh", "TLD": "site", "issuer": "Let's Encrypt", "weight": 6}
-{"timestamp": 879144997, "domain": "hayes-network-wired-vqztqhmtcc.dynamic-m.com", "regdomain": "dynamic-m.com", "SLD_TLD": "dynamic-m.com", "SLD": "dynamic-m", "TLD": "com", "issuer": "IdenTrust", "weight": 12}

@@ -487,3 +487,5 @@ web.ve
 web.za                    
 wiki.br                   
 zlg.br 
+ddns.net
+duckdns.org

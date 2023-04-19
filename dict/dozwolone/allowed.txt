@@ -1,0 +1,8 @@
+netflix.com
+apple.com
+facebook.com
+paypal.com
+office.com
+blik.com
+spotify.com
+gitlab

@@ -43,17 +43,18 @@ def listen_for_certstream(num_files):
     count = 0
     records = []
     url = "wss://certstream.calidog.io/"
+    #url = "ws://192.168.51.63:4000/"
     
     def message_callback(message, context):
         nonlocal count
         if message['message_type'] == "certificate_update":
             records.append(message)
-            if len(records) == 100:
+            if len(records) == 10000:
                 now = datetime.datetime.now()
                 timestamp_now = now.strftime('%Y-%m-%d_%H-%M-%S')
                 file_path = f"certstream_{timestamp_now}.json"
                 write_to_file(records, file_path)
-                time.sleep(5)
+                # time.sleep(10)
                 count += 1
                 print(count, ", ")
                 records.clear()
@@ -63,6 +64,6 @@ def listen_for_certstream(num_files):
     # Call listen_for_events with the context object
     certstream.listen_for_events(message_callback, url)
 
-listen_for_certstream(20)
+listen_for_certstream(1000)
 
 

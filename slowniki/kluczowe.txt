@@ -1,3 +1,0 @@
-.*[\.\-]?(netf(l|1)(i|I|l)x)[\.\-].*
-.*[\.\-]?(p(a|e)yp(a|e)(l|1))[\.\-].*
-.*[\.\-]?(apple|icloud|appleid|iforgot|itunes)[\.\-].*
